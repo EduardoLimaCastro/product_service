@@ -6,6 +6,7 @@ import com.eduardocastro.product_service.domain.exception.InvalidProductDataExce
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,7 +65,7 @@ public class Product {
     //  Domain Methods
     //============
 
-    private void update(String name ,String description, BigDecimal price, Integer stockQuantity, String category, String imageUrl) {
+    public void update(String name, String description, BigDecimal price, Integer stockQuantity, String category, String imageUrl) {
         validate(name, price, stockQuantity, category);
 
         boolean unchanged = this.name.equals(name)
@@ -117,11 +118,11 @@ public class Product {
         this.updatedAt = LocalDateTime.now();
     }
 
-//    public List<DomainEvent> pullDomainEvents() {
-//        List<DomainEvent> events = Collections.unmodifiableList(new ArrayList<>(domainEvents));
-//        domainEvents.clear();
-//        return events;
-//    }
+    public List<DomainEvent> pullDomainEvents() {
+        List<DomainEvent> events = Collections.unmodifiableList(new ArrayList<>(domainEvents));
+        domainEvents.clear();
+        return events;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -137,6 +138,7 @@ public class Product {
     //  Getters
     //============
 
+    public UUID getId() { return id; }
     public String getName() {return name;}
     public String getDescription() {return description;}
     public BigDecimal getPrice() {return price;}
